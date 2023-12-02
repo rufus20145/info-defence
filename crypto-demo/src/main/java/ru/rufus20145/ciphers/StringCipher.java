@@ -17,11 +17,11 @@ public interface StringCipher {
     /**
      * Дешифрует переданный зашифрованный текст.
      *
-     * @param cipherText Зашифрованный текст, который необходимо дешифровать.
+     * @param encryptedText Зашифрованный текст, который необходимо дешифровать.
      * @param key        Ключ, используемый для дешифрования.
      * @return Расшифрованный текст.
      */
-    String decrypt(String cipherText);
+    String decrypt(String encryptedText);
 
     /**
      * Возвращает название алгоритма шифрования

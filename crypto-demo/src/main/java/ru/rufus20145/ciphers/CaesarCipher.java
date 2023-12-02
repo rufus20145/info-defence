@@ -38,9 +38,9 @@ public class CaesarCipher extends AbsCipher {
     }
 
     @Override
-    public String decrypt(String cipherText) {
+    public String decrypt(String encryptedText) {
         StringBuilder decryptedText = new StringBuilder();
-        for (char ch : cipherText.toCharArray()) {
+        for (char ch : encryptedText.toCharArray()) {
             if (Character.isLowerCase(ch)) {
                 int index = (LOWERCASE_ALPHABET.indexOf(ch) - shift + ALPHABET_SIZE) % ALPHABET_SIZE;
                 decryptedText.append(LOWERCASE_ALPHABET.charAt(index));
