@@ -1,8 +1,11 @@
 package ru.rufus20145.ciphers;
 
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public abstract class AbsCipher implements StringCipher {
     private final String name;
 }
