@@ -9,6 +9,10 @@ public class CaesarCipher extends AbsSubstitutionCipher {
     public CaesarCipher(Integer shift) {
         super("Шифр Цезаря");
 
+        if (shift < 0) {
+            throw new IllegalArgumentException("Shift must be >= 0");
+        }
+
         this.shift = shift % ALPHABET_SIZE;
     }
 
@@ -26,7 +30,7 @@ public class CaesarCipher extends AbsSubstitutionCipher {
             } else {
                 int index = (indexOf + shift) % ALPHABET_SIZE;
                 char newChar = ALPHABET.charAt(index);
-                encryptedText.append(Character.isUpperCase(ch) ? Character.toUpperCase(newChar) : newChar);
+                encryptedText.append(Character.isUpperCase(ch) ? "&" : "").append(newChar);
             }
         }
         return encryptedText.toString();
@@ -35,10 +39,16 @@ public class CaesarCipher extends AbsSubstitutionCipher {
     @Override
     public String decrypt(String encryptedText) {
         StringBuilder decryptedText = new StringBuilder();
-        for (char ch : encryptedText.toCharArray()) {
+        for (int i = 0; i < encryptedText.length(); i++) {
+            char ch = encryptedText.charAt(i);
+            boolean isUpperCase = false;
+            if (ch == '&') {
+                isUpperCase = true;
+                ch = encryptedText.charAt(++i);
+            }
             int index = (ALPHABET.indexOf(Character.toLowerCase(ch)) - shift + ALPHABET_SIZE) % ALPHABET_SIZE;
             char newChar = ALPHABET.charAt(index);
-            decryptedText.append(Character.isUpperCase(ch) ? Character.toUpperCase(newChar) : newChar);
+            decryptedText.append(isUpperCase ? Character.toUpperCase(newChar) : newChar);
         }
         return decryptedText.toString();
     }
