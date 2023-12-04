@@ -2,7 +2,7 @@ package ru.rufus20145.ciphers;
 
 import ru.rufus20145.exceptions.EncryptionException;
 
-public class CaesarCipher extends SubstitutionAbsCipher {
+public class CaesarCipher extends AbsSubstitutionCipher {
 
     private Integer shift;
 

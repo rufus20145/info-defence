@@ -1,7 +1,7 @@
 package ru.rufus20145.ciphers;
 
 // TODO провести рефакторинг, удалить повторяющиеся фрагменты кода
-public class DoublePermutationCipher extends TranspositionAbsCipher {
+public class DoublePermutationCipher extends AbsTranspositionCipher {
     private int[] sequence1;
     private int[] sequence2;
 
