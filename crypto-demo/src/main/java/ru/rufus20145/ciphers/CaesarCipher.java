@@ -7,16 +7,19 @@ public class CaesarCipher extends AbsSubstitutionCipher {
     private Integer shift;
 
     public CaesarCipher(Integer shift) {
-        super("Шифр Цезаря");
+        this();
+        updateKey(shift);
+    }
 
+    public CaesarCipher() {
+        super("Шифр Цезаря");
+    }
+
+    public void updateKey(int shift) {
         if (shift < 0) {
             throw new IllegalArgumentException("Shift must be >= 0");
         }
 
-        this.shift = shift % ALPHABET_SIZE;
-    }
-
-    public void updateKey(int shift) {
         this.shift = shift % ALPHABET_SIZE;
     }
 

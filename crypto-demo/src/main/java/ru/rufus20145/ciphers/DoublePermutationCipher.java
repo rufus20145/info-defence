@@ -6,10 +6,14 @@ public class DoublePermutationCipher extends AbsTranspositionCipher {
     private int[] sequence2;
 
     public DoublePermutationCipher(String sequence1, String sequence2) {
-        super("Шифр двойной перестановки");
+        this();
 
         this.sequence1 = convertStringToIntArray(sequence1);
         this.sequence2 = convertStringToIntArray(sequence2);
+    }
+
+    public DoublePermutationCipher() {
+        super("Шифр двойной перестановки");
     }
 
     public void updateKey(String sequence1, String sequence2) {

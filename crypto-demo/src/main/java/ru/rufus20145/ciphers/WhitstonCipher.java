@@ -77,15 +77,12 @@ public class WhitstonCipher extends AbsSubstitutionCipher {
     private Table table2;
 
     public WhitstonCipher(Path sourceFile) {
-        super("Шифр Уитстона");
-
+        this();
         updateKey(sourceFile);
     }
 
     public WhitstonCipher() {
         super("Шифр Уитстона");
-
-        updateKey();
     }
 
     public void updateKey() {
