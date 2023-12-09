@@ -96,11 +96,11 @@ public class WhitstonCipher extends AbsSubstitutionCipher {
         super("Шифр Уитстона");
     }
 
-    public void updateKey() {
+    public void generateNewKey(Path targetKeyPath) {
         this.table1 = generateTable();
         this.table2 = generateTable();
 
-        try (BufferedWriter writer = Files.newBufferedWriter(Path.of("C:\\projects\\key.json"),
+        try (BufferedWriter writer = Files.newBufferedWriter(targetKeyPath,
                 StandardOpenOption.WRITE, StandardOpenOption.CREATE)) {
             Gson gson = new Gson();
             String json = gson.toJson(new WhitstonKey(this.table1, this.table2));
@@ -119,6 +119,11 @@ public class WhitstonCipher extends AbsSubstitutionCipher {
         } catch (IOException e) {
             System.out.println("IOException while reading file " + e.getMessage());
         }
+    }
+
+    // TODO сделать более продвинутую проверку
+    public boolean isReady() {
+        return this.table1 != null && this.table2 != null;
     }
 
     public String[] getKey() {
