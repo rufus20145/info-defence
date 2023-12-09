@@ -1,4 +1,4 @@
-package ru.rufus20145.ciphers;
+package ru.rufus20145.demo.ciphers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import ru.rufus20145.exceptions.EncryptionException;
+import ru.rufus20145.demo.exceptions.EncryptionException;
 
 //TODO провести рефакторинг, раскидать классы по файлам, устранить дублирование кода
 public class WhitstonCipher extends AbsSubstitutionCipher {

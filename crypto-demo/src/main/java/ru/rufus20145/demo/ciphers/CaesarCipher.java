@@ -1,6 +1,6 @@
-package ru.rufus20145.ciphers;
+package ru.rufus20145.demo.ciphers;
 
-import ru.rufus20145.exceptions.EncryptionException;
+import ru.rufus20145.demo.exceptions.EncryptionException;
 
 public class CaesarCipher extends AbsSubstitutionCipher {
 

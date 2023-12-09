@@ -1,4 +1,4 @@
-package ru.rufus20145.ciphers;
+package ru.rufus20145.demo.ciphers;
 
 import lombok.AccessLevel;
 import lombok.Getter;

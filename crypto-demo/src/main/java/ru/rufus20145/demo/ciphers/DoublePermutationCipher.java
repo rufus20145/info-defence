@@ -1,4 +1,4 @@
-package ru.rufus20145.ciphers;
+package ru.rufus20145.demo.ciphers;
 
 // TODO провести рефакторинг, удалить повторяющиеся фрагменты кода
 public class DoublePermutationCipher extends AbsTranspositionCipher {

@@ -1,4 +1,4 @@
-package ru.rufus20145.ciphers;
+package ru.rufus20145.demo.ciphers;
 
 /**
  * Абстрактный класс шифров перестановки

@@ -1,4 +1,4 @@
-package ru.rufus20145;
+package ru.rufus20145.demo;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

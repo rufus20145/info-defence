@@ -1,4 +1,4 @@
-package ru.rufus20145;
+package ru.rufus20145.demo;
 
 import java.io.File;
 import java.net.URL;
@@ -18,11 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import ru.rufus20145.ciphers.CaesarCipher;
-import ru.rufus20145.ciphers.DoublePermutationCipher;
-import ru.rufus20145.ciphers.StringCipher;
-import ru.rufus20145.ciphers.WhitstonCipher;
-import ru.rufus20145.exceptions.EncryptionException;
+import ru.rufus20145.demo.ciphers.CaesarCipher;
+import ru.rufus20145.demo.ciphers.DoublePermutationCipher;
+import ru.rufus20145.demo.ciphers.StringCipher;
+import ru.rufus20145.demo.ciphers.WhitstonCipher;
+import ru.rufus20145.demo.exceptions.EncryptionException;
 
 public class MainController implements Initializable {
     private static final String[] variants = { "Шифр двойной перестановки", "Шифр Цезаря", "Шифр Уитстона" };

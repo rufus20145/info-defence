@@ -1,4 +1,4 @@
-package ru.rufus20145.exceptions;
+package ru.rufus20145.demo.exceptions;
 
 public class EncryptionException extends IllegalArgumentException {
 
