@@ -65,6 +65,17 @@ public class WhitstonCipher extends AbsSubstitutionCipher {
         public char getChar(int col, int row) {
             return elements[col][row];
         }
+
+        public String getFormatted() {
+            StringBuilder formattedTable = new StringBuilder();
+            for (int i = 0; i < elements.length; i++) {
+                for (int j = 0; j < elements[i].length; j++) {
+                    formattedTable.append(elements[i][j] == '\n' ? "\\n" : elements[i][j]).append(" ");
+                }
+                formattedTable.append("\n");
+            }
+            return formattedTable.toString();
+        }
     }
 
     @AllArgsConstructor
@@ -108,6 +119,15 @@ public class WhitstonCipher extends AbsSubstitutionCipher {
         } catch (IOException e) {
             System.out.println("IOException while reading file " + e.getMessage());
         }
+    }
+
+    public String[] getKey() {
+        String[] tables = new String[2];
+
+        tables[0] = table1.getFormatted();
+        tables[1] = table2.getFormatted();
+
+        return tables;
     }
 
     @Override
