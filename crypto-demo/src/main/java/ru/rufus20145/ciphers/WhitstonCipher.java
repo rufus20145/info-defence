@@ -55,7 +55,7 @@ public class WhitstonCipher extends AbsSubstitutionCipher {
             for (int i = 0; i < elements.length; i++) {
                 for (int j = 0; j < elements[i].length; j++) {
                     if (elements[i][j] == Character.toLowerCase(ch)) {
-                        return new Coordinates(i, j/* , Character.isUpperCase(ch) */);
+                        return new Coordinates(i, j);
                     }
                 }
             }
