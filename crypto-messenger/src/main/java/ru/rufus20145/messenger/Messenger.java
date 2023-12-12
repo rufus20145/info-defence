@@ -23,7 +23,6 @@ public class Messenger {
         this.self = self;
         this.controller = controller;
         this.users = new ConcurrentHashMap<>();
-        users.put(self.getUsername(), self);
         receiver = new Receiver(self.getIpAddress(), port, self, this);
         sender = new Sender(port);
 

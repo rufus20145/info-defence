@@ -21,9 +21,9 @@ public abstract class AbsMessage implements Message {
         this.receiver = receiver;
     }
 
-    protected AbsMessage(MessageType type, String text, Self self) {
+    protected AbsMessage(MessageType type, Self self) {
         this.type = type;
-        this.text = text;
+        this.text = "";
         this.sender = self;
         this.receiver = new User("broadcast", self.getBroadcast(), self.getPublicKey());
     }

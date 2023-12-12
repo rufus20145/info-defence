@@ -8,7 +8,7 @@ import ru.rufus20145.messenger.users.User;
 public class StartMessage extends AbsMessage {
 
     public StartMessage(Self self) {
-        super(MessageType.START, "", self);
+        super(MessageType.START, self);
     }
 
     public StartMessage(User me, User newUser) {
@@ -20,8 +20,7 @@ public class StartMessage extends AbsMessage {
         return type + ":" + sender.getUsername() + ":" + getPublicKeyInBase64();
     }
 
-    public String getPublicKeyInBase64() {
+    private String getPublicKeyInBase64() {
         return Base64.getEncoder().encodeToString(sender.getPublicKey().getEncoded());
     }
-
 }

@@ -1,17 +1,15 @@
 package ru.rufus20145.messenger.messages;
 
-import ru.rufus20145.messenger.users.User;
+import ru.rufus20145.messenger.users.Self;
 
 public class StopMessage extends AbsMessage {
 
-    public StopMessage(String text, User sender, User receiver) {
-        super(MessageType.STOP, text, sender, receiver);
+    public StopMessage(Self self) {
+        super(MessageType.STOP, self);
     }
 
     @Override
     protected String getPrepared() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrepared'");
+        return type + ":" + sender.getUsername();
     }
-
 }
