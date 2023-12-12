@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import ru.rufus20145.messenger.messages.Message;
 import ru.rufus20145.messenger.messages.StartMessage;
+import ru.rufus20145.messenger.messages.StopMessage;
 import ru.rufus20145.messenger.messages.TextMessage;
 import ru.rufus20145.messenger.network.Receiver;
 import ru.rufus20145.messenger.network.Sender;
@@ -33,8 +34,9 @@ public class Messenger {
     }
 
     public void stop() {
-        sender.stopWorking();
         receiver.stopWorking();
+        sender.stopWorking();
+        sender.submitMessage(new StopMessage(self));
     }
 
     public void sendText(String text) {

@@ -82,4 +82,8 @@ public class MainController implements Initializable {
         messenger.sendText(messageTextArea.getText());
         messageTextArea.clear();
     }
+
+    public void stopMessenger() {
+        messenger.stop();
+    }
 }
