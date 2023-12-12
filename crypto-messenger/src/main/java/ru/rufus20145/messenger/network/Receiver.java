@@ -51,13 +51,13 @@ public class Receiver extends Thread implements Stoppable {
                     continue;
                 }
                 switch (msgType) {
-                    case MessageType.START:
+                    case START:
                         processStartMessage(parts[1], packet.getAddress(), parts[2]);
                         break;
-                    case MessageType.TEXT:
+                    case TEXT:
                         processTextMessage(parts[1], parts[2]);
                         break;
-                    case MessageType.STOP:
+                    case STOP:
                         processStopMessage(parts[1]);
                         break;
                 }
