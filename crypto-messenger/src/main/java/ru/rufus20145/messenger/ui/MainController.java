@@ -15,6 +15,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
 import ru.rufus20145.messenger.Messenger;
 import ru.rufus20145.messenger.messages.TextMessage;
 import ru.rufus20145.messenger.users.Self;
@@ -50,6 +51,16 @@ public class MainController implements Initializable {
         } else {
             throw new IllegalStateException("User data was not entered");
         }
+        messageTextArea.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                sendMessageByEnter();
+            }
+        });
+    }
+
+    private void sendMessageByEnter() {
+        messenger.sendText(messageTextArea.getText());
+        messageTextArea.clear();
     }
 
     private Self showCreatingSelfDialog() {
