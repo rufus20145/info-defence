@@ -46,6 +46,10 @@ public class Receiver extends Thread implements Stoppable {
                 String messageText = new String(packet.getData(), 0, packet.getLength(), StandardCharsets.UTF_8);
                 String[] parts = messageText.split(":");
                 MessageType msgType = MessageType.valueOf(parts[0]);
+                if (self.getUsername().equals(parts[1])) {
+                    log.error("Got message from myself");
+                    continue;
+                }
                 switch (msgType) {
                     case MessageType.START:
                         processStartMessage(parts[1], packet.getAddress(), parts[2]);
