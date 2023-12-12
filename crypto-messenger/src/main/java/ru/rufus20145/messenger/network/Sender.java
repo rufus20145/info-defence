@@ -28,7 +28,7 @@ public class Sender extends Thread implements Stoppable {
                 byte[] data = msg.getForSend();
                 DatagramPacket packet = new DatagramPacket(data, data.length, msg.getIpAddress(), targetPort);
                 socket.send(packet);
-                log.error("Message to {} was sent successfully.", msg.getReceiverUsername());
+                log.error("{} Message to {} was sent successfully.", msg.getType(), msg.getReceiverUsername());
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

@@ -42,5 +42,9 @@ public abstract class AbsMessage implements Message {
         return receiver.getUsername();
     }
 
+    public String getType() {
+        return type.name();
+    }
+
     protected abstract String getPrepared();
 }

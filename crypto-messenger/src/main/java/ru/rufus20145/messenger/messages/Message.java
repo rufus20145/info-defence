@@ -8,4 +8,6 @@ public interface Message {
     InetAddress getIpAddress();
 
     String getReceiverUsername();
+
+    String getType();
 }
