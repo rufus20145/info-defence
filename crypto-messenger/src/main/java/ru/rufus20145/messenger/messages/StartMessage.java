@@ -3,11 +3,16 @@ package ru.rufus20145.messenger.messages;
 import java.util.Base64;
 
 import ru.rufus20145.messenger.users.Self;
+import ru.rufus20145.messenger.users.User;
 
 public class StartMessage extends AbsMessage {
 
     public StartMessage(Self self) {
         super(MessageType.START, "", self);
+    }
+
+    public StartMessage(User me, User newUser) {
+        super(MessageType.START, "", me, newUser);
     }
 
     @Override
