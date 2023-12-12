@@ -68,6 +68,9 @@ public class Receiver extends Thread implements Stoppable {
     }
 
     private void processStartMessage(String username, InetAddress ip, String keyString) {
+        if (messenger.getUserByUsername(username) != null) {
+            return;
+        }
         PublicKey publicKey = parsePublicKey(keyString);
         User newUser = new User(username, ip, publicKey);
         messenger.addUser(newUser);
@@ -82,6 +85,7 @@ public class Receiver extends Thread implements Stoppable {
     }
 
     private void processStopMessage(String username) {
+        log.error("User {} is stopped", username);
         messenger.removeUserByUsername(username);
     }
 

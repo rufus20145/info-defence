@@ -40,7 +40,6 @@ public class Messenger {
     }
 
     public void sendText(String text) {
-        System.out.println("Sending text " + text);
         for (User user : users.values()) {
             Message msg = new TextMessage(text, self, user);
             sender.submitMessage(msg);
