@@ -3,6 +3,7 @@ package ru.rufus20145.messenger;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import javafx.application.Platform;
 import ru.rufus20145.messenger.messages.Message;
 import ru.rufus20145.messenger.messages.StartMessage;
 import ru.rufus20145.messenger.messages.StopMessage;
@@ -49,6 +50,7 @@ public class Messenger {
 
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
+        Platform.runLater(() -> controller.updateNumberOfUsers(users.size()));
         Message msg = new StartMessage(self, newUser);
         sender.submitMessage(msg);
     }
@@ -63,5 +65,6 @@ public class Messenger {
 
     public void removeUserByUsername(String username) {
         users.remove(username);
+        Platform.runLater(() -> controller.updateNumberOfUsers(users.size()));
     }
 }

@@ -40,6 +40,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        usersOnlineLabel.setText("0");
         Self self = showCreatingSelfDialog();
         if (self != null) {
             messenger = new Messenger(10435, self, this);
@@ -86,5 +87,9 @@ public class MainController implements Initializable {
 
     public void stopMessenger() {
         messenger.stop();
+    }
+
+    public void updateNumberOfUsers(int number) {
+        usersOnlineLabel.setText(String.valueOf(number));
     }
 }
