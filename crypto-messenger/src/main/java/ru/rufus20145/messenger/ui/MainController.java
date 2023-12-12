@@ -76,22 +76,7 @@ public class MainController implements Initializable {
     }
 
     public void showNewMessage(TextMessage msg) {
-        Platform.runLater(() -> {
-            // while (isRunning) {
-            System.out.println("Got msg from q: " + msg);
-            if (msg == null) {
-                try {
-                    Thread.sleep(250);
-                    // continue;
-                } catch (InterruptedException e) {
-                    System.out.println("Small thread was interrupted.");
-                    Thread.currentThread().interrupt();
-                }
-            } else {
-                messagesListView.getItems().add(msg);
-            }
-            // }
-        });
+        Platform.runLater(() -> messagesListView.getItems().add(msg));
     }
 
     private void sendMessage(ActionEvent event) {
