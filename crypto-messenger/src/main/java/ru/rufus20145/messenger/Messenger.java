@@ -44,10 +44,13 @@ public class Messenger {
             Message msg = new TextMessage(text, self, user);
             sender.submitMessage(msg);
         }
+        showNewMessage(new TextMessage(text, self, self));
     }
 
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
+        Message msg = new StartMessage(self, newUser);
+        sender.submitMessage(msg);
     }
 
     public User getUserByUsername(String username) {
