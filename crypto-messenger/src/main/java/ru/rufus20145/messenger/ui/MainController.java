@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -75,7 +76,22 @@ public class MainController implements Initializable {
     }
 
     public void showNewMessage(TextMessage msg) {
-        messagesListView.getItems().add(msg);
+        Platform.runLater(() -> {
+            // while (isRunning) {
+            System.out.println("Got msg from q: " + msg);
+            if (msg == null) {
+                try {
+                    Thread.sleep(250);
+                    // continue;
+                } catch (InterruptedException e) {
+                    System.out.println("Small thread was interrupted.");
+                    Thread.currentThread().interrupt();
+                }
+            } else {
+                messagesListView.getItems().add(msg);
+            }
+            // }
+        });
     }
 
     private void sendMessage(ActionEvent event) {
