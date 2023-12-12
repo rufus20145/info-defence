@@ -80,5 +80,6 @@ public class MainController implements Initializable {
 
     private void sendMessage(ActionEvent event) {
         messenger.sendText(messageTextArea.getText());
+        messageTextArea.clear();
     }
 }
