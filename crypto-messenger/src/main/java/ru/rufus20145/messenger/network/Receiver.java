@@ -47,7 +47,7 @@ public class Receiver extends Thread implements Stoppable {
                 String[] parts = messageText.split(":");
                 MessageType msgType = MessageType.valueOf(parts[0]);
                 if (self.getUsername().equals(parts[1])) {
-                    log.error("Got message from myself");
+                    log.error("Got {} message from myself", msgType.name());
                     continue;
                 }
                 switch (msgType) {
@@ -74,18 +74,19 @@ public class Receiver extends Thread implements Stoppable {
         PublicKey publicKey = parsePublicKey(keyString);
         User newUser = new User(username, ip, publicKey);
         messenger.addUser(newUser);
-        log.error("Got new user: {} on {}.", newUser.getUsername(), newUser.getIpAddress().getHostAddress());
+        log.error("User {} on {} started.", newUser.getUsername(), newUser.getIpAddress().getHostAddress());
     }
 
     private void processTextMessage(String username, String encryptedMessage) {
         User sender = messenger.getUserByUsername(username);
         TextMessage msg = new TextMessage(sender, self, encryptedMessage);
         messenger.showNewMessage(msg);
+        log.error("User {} sent text message", username);
     }
 
     private void processStopMessage(String username) {
-        log.error("User {} is stopped", username);
         messenger.removeUserByUsername(username);
+        log.error("User {} stopped", username);
     }
 
     private PublicKey parsePublicKey(String keyInBase64) {
