@@ -1,5 +1,6 @@
 package ru.rufus20145.messenger;
 
+import java.security.KeyPair;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -46,6 +47,10 @@ public class Messenger {
             sender.submitMessage(msg);
         }
         showNewMessage(new TextMessage(text, self, self));
+    }
+
+    public KeyPair getMyKeyPair() {
+        return new KeyPair(self.getPublicKey(), self.getPrivateKey());
     }
 
     public void addUser(User newUser) {

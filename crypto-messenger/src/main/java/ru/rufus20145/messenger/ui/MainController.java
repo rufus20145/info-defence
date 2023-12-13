@@ -2,6 +2,7 @@ package ru.rufus20145.messenger.ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.KeyPair;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -35,6 +36,9 @@ public class MainController implements Initializable {
     private Button changeViewButton;
 
     @FXML
+    private Button showKeysButton;
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
@@ -42,12 +46,15 @@ public class MainController implements Initializable {
 
     private Messenger messenger;
 
+    private String buffer;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usersOnlineLabel.setText("0");
         messagesListView.setCellFactory(new DecryptedMessageView());
         sendMessageButton.setOnMouseClicked(e -> sendMessage());
         changeViewButton.setOnMouseClicked(e -> changeView());
+        showKeysButton.setOnMouseClicked(e -> showKeys());
         messageTextArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 sendMessage();
@@ -63,6 +70,21 @@ public class MainController implements Initializable {
         }
     }
 
+    private void showKeys() {
+        if (!messageTextArea.getText().matches(
+                "^Public key: Sun RSA public key,(.*[\n\r]){5}Private key: SunRsaSign RSA private CRT key(.*[\n\r]){3}.*$")) {
+            buffer = messageTextArea.getText();
+            KeyPair pair = messenger.getMyKeyPair();
+            String formattedKey = "Public key: %s%n%nPrivate key: %s".formatted(
+                    pair.getPublic().toString(), pair.getPrivate());
+            messageTextArea.setText(formattedKey);
+            showKeysButton.setText("Вернуть текст сообщения");
+        } else {
+            messageTextArea.setText(buffer);
+            showKeysButton.setText("Показать пару ключей");
+        }
+    }
+
     private void sendMessage() {
         messenger.sendTextMessage(messageTextArea.getText());
         messageTextArea.clear();
@@ -71,10 +93,10 @@ public class MainController implements Initializable {
     private void changeView() {
         if (messagesListView.getCellFactory().getClass().equals(DecryptedMessageView.class)) {
             messagesListView.setCellFactory(new EncryptedMessageView());
-            changeViewButton.setText("Show dec");
+            changeViewButton.setText("Расшифрованный вид");
         } else {
             messagesListView.setCellFactory(new DecryptedMessageView());
-            changeViewButton.setText("Show dec");
+            changeViewButton.setText("Зашифрованный вид");
         }
     }
 
