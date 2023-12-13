@@ -31,7 +31,7 @@ public class TextMessage extends AbsMessage {
      */
     public TextMessage(String text, User sender, User receiver) {
         super(MessageType.TEXT, text, sender, receiver);
-        this.encryptedText = Base64.getEncoder().encodeToString(receiver.encrypt(text));
+        this.encryptedText = text;
     }
 
     @Override
