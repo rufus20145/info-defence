@@ -19,6 +19,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import lombok.Setter;
+import ru.rufus20145.messenger.Messenger;
 import ru.rufus20145.messenger.users.Self;
 
 public class NewUserController implements Initializable {
@@ -76,7 +77,7 @@ public class NewUserController implements Initializable {
         KeyPairGenerator keyPairGenerator;
         try {
             keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
+            keyPairGenerator.initialize(Messenger.KEY_SIZE);
             return keyPairGenerator.generateKeyPair();
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalArgumentException(e);

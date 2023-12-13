@@ -44,6 +44,9 @@ public class MainController implements Initializable {
     @FXML
     private Label usersOnlineLabel;
 
+    @FXML
+    private Label warningLabel;
+
     private Messenger messenger;
 
     private String buffer;
@@ -86,8 +89,16 @@ public class MainController implements Initializable {
     }
 
     private void sendMessage() {
-        messenger.sendTextMessage(messageTextArea.getText());
-        messageTextArea.clear();
+        String text = messageTextArea.getText();
+        int limit = Messenger.KEY_SIZE / 8 - 11;
+        if (text.length() > limit) {
+            warningLabel
+                    .setText("Сообщение должно быть не более %d символов, сейчас %d".formatted(limit, text.length()));
+        } else {
+            messenger.sendTextMessage(text);
+            messageTextArea.clear();
+            warningLabel.setText("");
+        }
     }
 
     private void changeView() {
@@ -133,6 +144,6 @@ public class MainController implements Initializable {
     }
 
     public void updateNumberOfUsers(int number) {
-        usersOnlineLabel.setText(String.valueOf(number));
+        usersOnlineLabel.setText(String.valueOf(number + 1));
     }
 }

@@ -16,6 +16,7 @@ import ru.rufus20145.messenger.users.Self;
 import ru.rufus20145.messenger.users.User;
 
 public class Messenger {
+    public static final int KEY_SIZE = 2048;
     private Receiver receiver;
     private Sender sender;
     private ConcurrentMap<String, User> users;
