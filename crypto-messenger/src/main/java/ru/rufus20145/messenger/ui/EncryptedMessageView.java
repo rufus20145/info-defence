@@ -5,7 +5,7 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import ru.rufus20145.messenger.messages.TextMessage;
 
-final class MessageListView implements Callback<ListView<TextMessage>, ListCell<TextMessage>> {
+final class EncryptedMessageView implements Callback<ListView<TextMessage>, ListCell<TextMessage>> {
     @Override
     public ListCell<TextMessage> call(ListView<TextMessage> param) {
         return new ListCell<>() {
@@ -15,7 +15,7 @@ final class MessageListView implements Callback<ListView<TextMessage>, ListCell<
                 if (empty || message == null) {
                     setText(null);
                 } else {
-                    setText(message.getSender().getUsername() + " — " + message.getText());
+                    setText(message.getSender().getUsername() + " — " + message.getEncryptedText());
                 }
             }
         };

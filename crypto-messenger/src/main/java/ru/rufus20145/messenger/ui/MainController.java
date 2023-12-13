@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import ru.rufus20145.messenger.Messenger;
 import ru.rufus20145.messenger.messages.TextMessage;
 import ru.rufus20145.messenger.users.Self;
@@ -32,6 +33,9 @@ public class MainController implements Initializable {
     private Button sendMessageButton;
 
     @FXML
+    private Button changeViewButton;
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
@@ -42,20 +46,32 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usersOnlineLabel.setText("0");
-        Self self = showCreatingSelfDialog();
-        if (self != null) {
-            messenger = new Messenger(10435, self, this);
-            messagesListView.setCellFactory(new MessageListView());
-            usernameLabel.setText(self.getUsername());
-            sendMessageButton.setOnAction(this::sendMessage);
-        } else {
-            throw new IllegalStateException("User data was not entered");
-        }
+        messagesListView.setCellFactory(new DecryptedMessageView());
+        sendMessageButton.setOnMouseClicked(this::sendMessage);
+        changeViewButton.setOnMouseClicked(this::changeView);
         messageTextArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 sendMessageByEnter();
             }
         });
+
+        Self self = showCreatingSelfDialog();
+        if (self != null) {
+            messenger = new Messenger(10435, self, this);
+            usernameLabel.setText(self.getUsername());
+        } else {
+            throw new IllegalStateException("User data was not entered");
+        }
+    }
+
+    private void changeView(MouseEvent event) {
+        if (messagesListView.getCellFactory().getClass().equals(DecryptedMessageView.class)) {
+            messagesListView.setCellFactory(new EncryptedMessageView());
+            changeViewButton.setText("Show dec");
+        } else {
+            messagesListView.setCellFactory(new DecryptedMessageView());
+            changeViewButton.setText("Show dec");
+        }
     }
 
     private void sendMessageByEnter() {
@@ -91,7 +107,7 @@ public class MainController implements Initializable {
         Platform.runLater(() -> messagesListView.getItems().add(msg));
     }
 
-    private void sendMessage(ActionEvent event) {
+    private void sendMessage(MouseEvent event) {
         messenger.sendText(messageTextArea.getText());
         messageTextArea.clear();
     }

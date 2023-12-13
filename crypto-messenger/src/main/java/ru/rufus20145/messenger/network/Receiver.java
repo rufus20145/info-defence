@@ -79,8 +79,7 @@ public class Receiver extends Thread implements Stoppable {
 
     private void processTextMessage(String username, String encryptedMessage) {
         User sender = messenger.getUserByUsername(username);
-        String text = self.decryptMessage(encryptedMessage);
-        TextMessage msg = new TextMessage(text, sender, self);
+        TextMessage msg = new TextMessage(sender, self, encryptedMessage);
         messenger.showNewMessage(msg);
     }
 
