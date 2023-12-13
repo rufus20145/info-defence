@@ -12,6 +12,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -50,6 +51,7 @@ public class NewUserController implements Initializable {
         networksComboBox.setCellFactory(param -> new NetworksList());
         networksComboBox.getItems().addAll(getIpV4Interfaces());
 
+        Platform.runLater(() -> usernameTextField.requestFocus());
     }
 
     private void showAlert(String message) {
