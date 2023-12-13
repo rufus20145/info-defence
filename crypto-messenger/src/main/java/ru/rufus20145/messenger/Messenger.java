@@ -40,7 +40,7 @@ public class Messenger {
         sender.submitMessage(new StopMessage(self));
     }
 
-    public void sendText(String text) {
+    public void sendTextMessage(String text) {
         for (User user : users.values()) {
             Message msg = new TextMessage(text, self, user);
             sender.submitMessage(msg);
@@ -51,8 +51,8 @@ public class Messenger {
     public void addUser(User newUser) {
         users.put(newUser.getUsername(), newUser);
         Platform.runLater(() -> controller.updateNumberOfUsers(users.size()));
-        Message msg = new StartMessage(self, newUser);
-        sender.submitMessage(msg);
+        Message helloMsg = new StartMessage(self, newUser);
+        sender.submitMessage(helloMsg);
     }
 
     public User getUserByUsername(String username) {

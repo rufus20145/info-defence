@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import ru.rufus20145.messenger.Messenger;
 import ru.rufus20145.messenger.messages.TextMessage;
 import ru.rufus20145.messenger.users.Self;
@@ -47,15 +46,15 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         usersOnlineLabel.setText("0");
         messagesListView.setCellFactory(new DecryptedMessageView());
-        sendMessageButton.setOnMouseClicked(this::sendMessage);
-        changeViewButton.setOnMouseClicked(this::changeView);
+        sendMessageButton.setOnMouseClicked(e -> sendMessage());
+        changeViewButton.setOnMouseClicked(e -> changeView());
         messageTextArea.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                sendMessageByEnter();
+                sendMessage();
             }
         });
 
-        Self self = showCreatingSelfDialog();
+        Self self = createSelf();
         if (self != null) {
             messenger = new Messenger(10435, self, this);
             usernameLabel.setText(self.getUsername());
@@ -64,7 +63,12 @@ public class MainController implements Initializable {
         }
     }
 
-    private void changeView(MouseEvent event) {
+    private void sendMessage() {
+        messenger.sendTextMessage(messageTextArea.getText());
+        messageTextArea.clear();
+    }
+
+    private void changeView() {
         if (messagesListView.getCellFactory().getClass().equals(DecryptedMessageView.class)) {
             messagesListView.setCellFactory(new EncryptedMessageView());
             changeViewButton.setText("Show dec");
@@ -74,12 +78,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void sendMessageByEnter() {
-        messenger.sendText(messageTextArea.getText());
-        messageTextArea.clear();
-    }
-
-    private Self showCreatingSelfDialog() {
+    private Self createSelf() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewUser.fxml"));
             Dialog<Self> dialog = new Dialog<>();
@@ -105,11 +104,6 @@ public class MainController implements Initializable {
 
     public void showNewMessage(TextMessage msg) {
         Platform.runLater(() -> messagesListView.getItems().add(msg));
-    }
-
-    private void sendMessage(MouseEvent event) {
-        messenger.sendText(messageTextArea.getText());
-        messageTextArea.clear();
     }
 
     public void stopMessenger() {
